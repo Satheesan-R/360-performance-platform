@@ -1,0 +1,38 @@
+const mongoose = require('mongoose');
+
+const employeeSchema = new mongoose.Schema(
+  {
+    employeeNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true },
+    workEmail: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    phone: { type: String, trim: true },
+    jobTitle: { type: String, trim: true },
+    department: { type: String, trim: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      unique: true,
+      sparse: true,
+    },
+    onboardingStatus: {
+      type: String,
+      enum: ['pending', 'completed'],
+      default: 'completed',
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model('Employee', employeeSchema);
