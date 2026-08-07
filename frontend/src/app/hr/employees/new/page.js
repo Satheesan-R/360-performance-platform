@@ -8,8 +8,8 @@ import { authenticatedRequest } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
-  employeeNumber: '', firstName: '', lastName: '', workEmail: '', phone: '',
-  department: '', jobTitle: '', role: 'employee',
+  employeeNumber: '', firstName: '', lastName: '', workEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
+  department: '', jobTitle: '', role: 'employee',JoiningDate: '', probationPeriod: '', manager: '',
 };
 
 function EmployeeForm() {
