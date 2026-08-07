@@ -7,6 +7,23 @@ import FormField from '@/components/FormField';
 import { apiRequest } from '@/lib/api';
 import { dashboardFor, saveSession } from '@/lib/auth';
 
+const formFields = [
+  {
+    label: 'Work email',
+    name: 'email',
+    type: 'email',
+    placeholder: 'name@company.com',
+    autoComplete: 'email',
+  },
+  {
+    label: 'Password',
+    name: 'password',
+    type: 'password',
+    placeholder: 'Enter your password',
+    autoComplete: 'current-password',
+  },
+];
+
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: '', password: '' });
@@ -55,26 +72,19 @@ export default function LoginPage() {
 
           {error && <div className="alert alert-error">{error}</div>}
 
-          <FormField
-            label="Work email"
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={update}
-            placeholder="name@company.com"
-            autoComplete="email"
-            required
-          />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={update}
-            placeholder="Enter your password"
-            autoComplete="current-password"
-            required
-          />
+          {formFields.map((field) => (
+            <FormField
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              value={form[field.name]}
+              onChange={update}
+              placeholder={field.placeholder}
+              autoComplete={field.autoComplete}
+              required
+            />
+          ))}
           <button className="button button-primary button-block" disabled={loading}>
             {loading ? <><span className="spinner small" />Signing in…</> : 'Sign in'}
           </button>
