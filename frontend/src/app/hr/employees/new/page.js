@@ -4,16 +4,26 @@ import { useState } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import DashboardShell from '@/components/DashboardShell';
 import FormField from '@/components/FormField';
-import { authenticatedRequest } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
-  employeeNumber: '', firstName: '', lastName: '', workEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
-import { getToken } from '@/lib/auth';
-
-const initialForm = {
-  employeeNumber: '', firstName: '', lastName: '', workEmail: '',personalEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
-  department: '', jobTitle: '', role: 'employee',JoiningDate: '', probationPeriod: '', manager: '',
+  employeeNumber: '',
+  firstName: '',
+  lastName: '',
+  workEmail: '',
+  personalEmail: '',
+  phone: '',
+  address: '',
+  university: '',
+  previousCompany: '',
+  previousJobTitle: '',
+  yearsOfExperience: '',
+  department: '',
+  jobTitle: '',
+  role: 'employee',
+  JoiningDate: '',
+  probationPeriod: '',
+  manager: '',
 };
 
 function EmployeeForm() {
@@ -32,11 +42,6 @@ function EmployeeForm() {
     setSuccess(null);
     setLoading(true);
     try {
-      const response = await authenticatedRequest('/employees', getToken(), {
-        method: 'POST',
-        body: JSON.stringify(form),
-      });
-      setSuccess(response.data);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/employees`, {
         method: 'POST',
         headers: {
@@ -76,18 +81,13 @@ function EmployeeForm() {
           <div className="form-grid">
             <FormField label="First name" name="firstName" value={form.firstName} onChange={update} required />
             <FormField label="Last name" name="lastName" value={form.lastName} onChange={update} required />
-            <FormField label="Personal email" name="personalEmail" type="email" value={form.workEmail} onChange={update} required />
+            <FormField label="Personal email" name="personalEmail" type="email" value={form.personalEmail || ''} onChange={update} required />
             <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
             <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
             <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
             <FormField label="Previous company (optional)" name="previousCompany" value={form.previousCompany || ''} onChange={update} />
             <FormField label="Previous job title (optional)" name="previousJobTitle" value={form.previousJobTitle || ''} onChange={update} />
             <FormField label="Years of experience (optional)" name="yearsOfExperience" value={form.yearsOfExperience || ''} onChange={update} />
-            <FormField label="Personal email" name="personalEmail" type="email" value={form.personalEmail || ''} onChange={update} required />
-            <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
-            <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
-            <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
-            
           </div>
         </div>
 
@@ -95,12 +95,9 @@ function EmployeeForm() {
           <div><span>02</span><h2>Employment details</h2><p>Information that defines their place in the organization.</p></div>
           <div className="form-grid">
             <FormField label="Employee number" name="employeeNumber" value={form.employeeNumber} onChange={update} placeholder="EMP-001" required />
-            <FormField label="Joining date (optional)" name="JoiningDate" type="date" value={form.JoiningDate || ''} onChange={update} />
-            <FormField label="Probation period (optional)" name="probationPeriod" value={form.probationPeriod || ''} onChange={update} />
-            <FormField label="Manager (optional)" name="manager" value={form.manager || ''} onChange={update} />
             <FormField label="Work email" name="workEmail" type="email" value={form.workEmail} onChange={update} required />
-            <FormField label="Joining date " name="JoiningDate" type="date" value={form.JoiningDate || ''} onChange={update} />
-            <FormField label="Probation period " name="probationPeriod" value={form.probationPeriod || ''} onChange={update} />
+            <FormField label="Joining date" name="JoiningDate" type="date" value={form.JoiningDate || ''} onChange={update} />
+            <FormField label="Probation period" name="probationPeriod" value={form.probationPeriod || ''} onChange={update} />
             <FormField label="Manager" name="manager" value={form.manager || ''} onChange={update} />
             <FormField label="Job title" name="jobTitle" value={form.jobTitle} onChange={update} />
             <FormField label="Department" name="department" value={form.department} onChange={update} />
