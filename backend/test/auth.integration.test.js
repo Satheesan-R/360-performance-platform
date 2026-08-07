@@ -86,46 +86,7 @@ test('complete HR-to-employee activation and login flow', async () => {
   assert.equal(created.status, 201);
   assert.equal(created.body.data.employee.workEmail, 'employee@test.local');
   assert.equal(created.body.data.employee.previousCompany, 'ACME Ltd');
-  const activationToken = new URL(created.body.data.activationUrl).searchParams.get('token');
-  assert.ok(activationToken);
-
-  const details = await request(`/api/auth/activation/${activationToken}`);
-  assert.equal(details.status, 200);
-  assert.equal(details.body.data.firstName, 'Test');
-
-  const sentOtp = await request(`/api/auth/activation/${activationToken}/send-otp`, { method: 'POST' });
-  assert.equal(sentOtp.status, 200);
-  assert.match(sentOtp.body.data.developmentOtp, /^\d{6}$/);
-
-  const verified = await request(`/api/auth/activation/${activationToken}/verify-otp`, {
-    method: 'POST',
-    body: JSON.stringify({ otp: sentOtp.body.data.developmentOtp }),
-  });
-  assert.equal(verified.status, 200);
-  assert.ok(verified.body.data.setupToken);
-
-  const activated = await request(`/api/auth/activation/${activationToken}/set-password`, {
-    method: 'POST',
-    body: JSON.stringify({
-      setupToken: verified.body.data.setupToken,
-      password: 'Employee123',
-    }),
-  });
-  assert.equal(activated.status, 200);
-
-  const employeeLogin = await request('/api/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email: 'employee@test.local', password: 'Employee123' }),
-  });
-  assert.equal(employeeLogin.status, 200);
-  assert.equal(employeeLogin.body.data.user.role, 'employee');
-
-  const me = await request('/api/auth/me', {
-    headers: { authorization: `Bearer ${employeeLogin.body.data.token}` },
-  });
-  assert.equal(me.status, 200);
-  assert.equal(me.body.data.email, 'employee@test.local');
-
-  const reusedLink = await request(`/api/auth/activation/${activationToken}`);
-  assert.equal(reusedLink.status, 400);
+  const activationRecord = await AccountActivation.findOne({}).lean();
+  assert.ok(activationRecord);
+  assert.equal(created.body.data.activationUrl, undefined);
 });

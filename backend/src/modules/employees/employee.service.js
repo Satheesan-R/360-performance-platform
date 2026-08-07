@@ -54,7 +54,7 @@ async function createEmployee(input) {
     const activationUrl = `${env.frontendUrl}/auth/activate?token=${rawToken}`;
     await sendActivationEmail({ employee, activationUrl });
 
-    return { employee, activationUrl: env.nodeEnv === 'production' ? undefined : activationUrl };
+    return { employee };
   } catch (error) {
     if (activation) await AccountActivation.deleteOne({ _id: activation.id });
     if (user) await User.deleteOne({ _id: user.id });
