@@ -4,7 +4,6 @@ import { useState } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import DashboardShell from '@/components/DashboardShell';
 import FormField from '@/components/FormField';
-import { authenticatedRequest } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
@@ -28,11 +27,21 @@ function EmployeeForm() {
     setSuccess(null);
     setLoading(true);
     try {
-      const response = await authenticatedRequest('/employees', getToken(), {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/employees`, {
         method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${getToken()}`,
+        },
         body: JSON.stringify(form),
       });
-      setSuccess(response.data);
+
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Failed to create employee');
+      }
+
+      setSuccess(payload.data);
       setForm(initialForm);
     } catch (requestError) {
       setError(requestError.message);
