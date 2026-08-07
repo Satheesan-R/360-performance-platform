@@ -12,8 +12,8 @@ const initialForm = {
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
-  employeeNumber: '', firstName: '', lastName: '', workEmail: '',personalEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
-  department: '', jobTitle: '', role: 'employee',JoiningDate: '', probationPeriod: '', manager: '',
+  employeeNumber: '', firstName: '', lastName: '', workEmail: '', personalEmail: '', phone: '', address: '', university: '', previousCompany: '', previousJobTitle: '', yearsOfExperience: '',
+  department: '', jobTitle: '', role: 'employee', JoiningDate: '', probationPeriod: '', manager: '',
 };
 
 function EmployeeForm() {
@@ -66,8 +66,10 @@ function EmployeeForm() {
       {error && <div className="alert alert-error">{error}</div>}
       {success && (
         <div className="alert alert-success invitation-result">
-          <div><strong>Employee created successfully</strong><span>The activation invitation has been prepared for {success.employee.workEmail}.</span></div>
-          {success.activationUrl && <a href={success.activationUrl}>Open development activation link</a>}
+          <div>
+            <strong>Employee created successfully</strong>
+            <span>The activation invitation has been sent to {success.employee.workEmail}.</span>
+          </div>
         </div>
       )}
       <form className="employee-form" onSubmit={submit}>
@@ -87,7 +89,7 @@ function EmployeeForm() {
             <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
             <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
             <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
-            
+
           </div>
         </div>
 
