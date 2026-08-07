@@ -15,9 +15,6 @@ const initialForm = {
   phone: '',
   address: '',
   university: '',
-  previousCompany: '',
-  previousJobTitle: '',
-  yearsOfExperience: '',
   department: '',
   jobTitle: '',
   role: 'employee',
@@ -71,8 +68,10 @@ function EmployeeForm() {
       {error && <div className="alert alert-error">{error}</div>}
       {success && (
         <div className="alert alert-success invitation-result">
-          <div><strong>Employee created successfully</strong><span>The activation invitation has been prepared for {success.employee.workEmail}.</span></div>
-          {success.activationUrl && <a href={success.activationUrl}>Open development activation link</a>}
+          <div>
+            <strong>Employee created successfully</strong>
+            <span>The activation invitation has been sent to {success.employee.workEmail}.</span>
+          </div>
         </div>
       )}
       <form className="employee-form" onSubmit={submit}>
@@ -85,9 +84,7 @@ function EmployeeForm() {
             <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
             <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
             <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
-            <FormField label="Previous company (optional)" name="previousCompany" value={form.previousCompany || ''} onChange={update} />
-            <FormField label="Previous job title (optional)" name="previousJobTitle" value={form.previousJobTitle || ''} onChange={update} />
-            <FormField label="Years of experience (optional)" name="yearsOfExperience" value={form.yearsOfExperience || ''} onChange={update} />
+
           </div>
         </div>
 

@@ -15,7 +15,6 @@ async function create(req, res, next) {
     const result = await createEmployee(req.body);
     return success(res, 201, 'Employee created and activation email sent', {
       employee: result.employee,
-      activationUrl: result.activationUrl,
     });
   } catch (error) {
     next(error);
