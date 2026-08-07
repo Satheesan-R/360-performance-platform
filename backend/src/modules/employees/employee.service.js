@@ -8,6 +8,7 @@ const { sendActivationEmail } = require('../../services/email.service');
 
 async function createEmployee(input) {
   const email = input.workEmail.toLowerCase().trim();
+  const personalEmail = input.personalEmail?.toLowerCase().trim() || undefined;
   const duplicate = await Employee.exists({
     $or: [{ workEmail: email }, { employeeNumber: input.employeeNumber.trim() }],
   });
@@ -19,7 +20,7 @@ async function createEmployee(input) {
   let user;
   let activation;
   try {
-    employee = await Employee.create({ ...input, workEmail: email });
+    employee = await Employee.create({ ...input, workEmail: email, personalEmail });
     user = await User.create({ employee: employee.id, email, role: input.role || 'employee' });
     employee.user = user.id;
     await employee.save();
