@@ -26,7 +26,13 @@ async function sendMail(message) {
   }
 
   if (!env.mailUser || !env.mailPassword || !env.mailFrom) {
-    throw new Error('Gmail configuration is incomplete');
+    console.warn('SMTP mail configuration is incomplete; falling back to console email');
+    console.log('\n--- DEVELOPMENT EMAIL ---');
+    console.log(`To: ${message.to}`);
+    console.log(`Subject: ${message.subject}`);
+    console.log(message.text);
+    console.log('--- END EMAIL ---\n');
+    return { messageId: 'console-preview' };
   }
 
   return getTransporter().sendMail({ from: env.mailFrom, ...message });
