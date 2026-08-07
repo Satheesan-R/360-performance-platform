@@ -9,6 +9,10 @@ import { getToken } from '@/lib/auth';
 
 const initialForm = {
   employeeNumber: '', firstName: '', lastName: '', workEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
+import { getToken } from '@/lib/auth';
+
+const initialForm = {
+  employeeNumber: '', firstName: '', lastName: '', workEmail: '',personalEmail: '', phone: '', address: '', university: '',previousCompany: '',previousJobTitle: '', yearsOfExperience: '',
   department: '', jobTitle: '', role: 'employee',JoiningDate: '', probationPeriod: '', manager: '',
 };
 
@@ -33,6 +37,21 @@ function EmployeeForm() {
         body: JSON.stringify(form),
       });
       setSuccess(response.data);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/employees`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify(form),
+      });
+
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.message || 'Failed to create employee');
+      }
+
+      setSuccess(payload.data);
       setForm(initialForm);
     } catch (requestError) {
       setError(requestError.message);
@@ -64,6 +83,11 @@ function EmployeeForm() {
             <FormField label="Previous company (optional)" name="previousCompany" value={form.previousCompany || ''} onChange={update} />
             <FormField label="Previous job title (optional)" name="previousJobTitle" value={form.previousJobTitle || ''} onChange={update} />
             <FormField label="Years of experience (optional)" name="yearsOfExperience" value={form.yearsOfExperience || ''} onChange={update} />
+            <FormField label="Personal email" name="personalEmail" type="email" value={form.personalEmail || ''} onChange={update} required />
+            <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
+            <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
+            <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
+            
           </div>
         </div>
 
@@ -74,6 +98,10 @@ function EmployeeForm() {
             <FormField label="Joining date (optional)" name="JoiningDate" type="date" value={form.JoiningDate || ''} onChange={update} />
             <FormField label="Probation period (optional)" name="probationPeriod" value={form.probationPeriod || ''} onChange={update} />
             <FormField label="Manager (optional)" name="manager" value={form.manager || ''} onChange={update} />
+            <FormField label="Work email" name="workEmail" type="email" value={form.workEmail} onChange={update} required />
+            <FormField label="Joining date " name="JoiningDate" type="date" value={form.JoiningDate || ''} onChange={update} />
+            <FormField label="Probation period " name="probationPeriod" value={form.probationPeriod || ''} onChange={update} />
+            <FormField label="Manager" name="manager" value={form.manager || ''} onChange={update} />
             <FormField label="Job title" name="jobTitle" value={form.jobTitle} onChange={update} />
             <FormField label="Department" name="department" value={form.department} onChange={update} />
             <label className="field">
