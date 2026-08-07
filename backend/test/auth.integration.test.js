@@ -71,7 +71,13 @@ test('complete HR-to-employee activation and login flow', async () => {
       firstName: 'Test',
       lastName: 'Employee',
       workEmail: 'employee@test.local',
+      personalEmail: 'employee.personal@test.local',
       phone: '+94770000000',
+      address: 'Colombo',
+      university: 'University of Colombo',
+      previousCompany: 'ACME Ltd',
+      previousJobTitle: 'Junior Developer',
+      yearsOfExperience: '3',
       department: 'Engineering',
       jobTitle: 'Developer',
       role: 'employee',
@@ -79,6 +85,7 @@ test('complete HR-to-employee activation and login flow', async () => {
   });
   assert.equal(created.status, 201);
   assert.equal(created.body.data.employee.workEmail, 'employee@test.local');
+  assert.equal(created.body.data.employee.previousCompany, 'ACME Ltd');
   const activationToken = new URL(created.body.data.activationUrl).searchParams.get('token');
   assert.ok(activationToken);
 
