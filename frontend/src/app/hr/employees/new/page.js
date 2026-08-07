@@ -92,8 +92,3 @@ function EmployeeForm() {
 export default function NewEmployeePage() {
   return <AuthGuard roles={['hr', 'admin']}>{(user) => <DashboardShell user={user}><EmployeeForm /></DashboardShell>}</AuthGuard>;
 }
-
-
-export default function NewEmployeePage() {
-  return <AuthGuard roles={['hr', 'admin']}>{(user) => <DashboardShell user={user}><EmployeeForm /></DashboardShell>}</AuthGuard>;
-}
