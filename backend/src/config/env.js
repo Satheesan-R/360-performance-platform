@@ -17,6 +17,9 @@ function validateEnv() {
   if (!['console', 'smtp'].includes(process.env.MAIL_MODE || 'console')) {
     throw new Error('MAIL_MODE must be console or smtp');
   }
+  if (process.env.MAIL_MODE === 'smtp' && (!process.env.MAIL_USER || !process.env.MAIL_PASSWORD || !process.env.MAIL_FROM)) {
+    throw new Error('MAIL_USER, MAIL_PASSWORD, and MAIL_FROM are required when MAIL_MODE=smtp');
+  }
 }
 
 module.exports = {
@@ -36,7 +39,7 @@ module.exports = {
     mailPassword: process.env.MAIL_PASSWORD,
     mailFrom: process.env.MAIL_FROM,
     activationTokenMinutes: Number(process.env.ACTIVATION_TOKEN_MINUTES) || 1440,
-    otpMinutes: Number(process.env.OTP_MINUTES) || 10,
-    setupTokenMinutes: Number(process.env.SETUP_TOKEN_MINUTES) || 10,
+    otpMinutes: Number(process.env.OTP_MINUTES) || 2,
+    setupTokenMinutes: Number(process.env.SETUP_TOKEN_MINUTES) || 2,
   },
 };

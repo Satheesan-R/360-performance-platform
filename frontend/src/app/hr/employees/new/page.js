@@ -7,15 +7,10 @@ import FormField from '@/components/FormField';
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
-<<<<<<< Updated upstream
-  employeeNumber: '', firstName: '', lastName: '', workEmail: '', personalEmail: '', phone: '', address: '', university: '', previousCompany: '', previousJobTitle: '', yearsOfExperience: '',
-  department: '', jobTitle: '', role: 'employee', JoiningDate: '', probationPeriod: '', manager: '',
-=======
   employeeNumber: '', firstName: '', lastName: '', personalEmail: '', workEmail: '',
   phone: '', address: '', university: '', previousCompany: '', previousJobTitle: '',
   yearsOfExperience: '', department: '', jobTitle: '', role: 'employee', JoiningDate: '',
   probationPeriod: '', manager: '',
->>>>>>> Stashed changes
 };
 
 function EmployeeForm() {
@@ -34,28 +29,10 @@ function EmployeeForm() {
     setSuccess(null);
     setLoading(true);
     try {
-<<<<<<< Updated upstream
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/employees`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${getToken()}`,
-        },
-        body: JSON.stringify(form),
-      });
-
-      const payload = await response.json();
-      if (!response.ok) {
-        throw new Error(payload?.message || 'Failed to create employee');
-      }
-
-      setSuccess(payload.data);
-=======
       const response = await authenticatedRequest('/employees', getToken(), {
         method: 'POST', body: JSON.stringify(form),
       });
       setSuccess(response.data);
->>>>>>> Stashed changes
       setForm(initialForm);
     } catch (requestError) {
       setError(requestError.message);
@@ -71,32 +48,14 @@ function EmployeeForm() {
         <a href="/dashboard/hr" className="button button-ghost">Back to dashboard</a>
       </div>
       {error && <div className="alert alert-error">{error}</div>}
-<<<<<<< Updated upstream
-      {success && (
-        <div className="alert alert-success invitation-result">
-          <div>
-            <strong>Employee created successfully</strong>
-            <span>The activation invitation has been sent to {success.employee.workEmail}.</span>
-          </div>
-        </div>
-      )}
-=======
       {success && <div className="alert alert-success invitation-result"><div><strong>Employee created successfully</strong><span>The activation link was sent to {success.employee.workEmail}.</span></div></div>}
 
->>>>>>> Stashed changes
       <form className="employee-form" onSubmit={submit}>
         <div className="form-section">
           <div><span>01</span><h2>Personal details</h2><p>Basic information used across the employee profile.</p></div>
           <div className="form-grid">
             <FormField label="First name" name="firstName" value={form.firstName} onChange={update} required />
             <FormField label="Last name" name="lastName" value={form.lastName} onChange={update} required />
-<<<<<<< Updated upstream
-            <FormField label="Personal email" name="personalEmail" type="email" value={form.personalEmail || ''} onChange={update} required />
-            <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
-            <FormField label="Address (optional)" name="address" value={form.address || ''} onChange={update} />
-            <FormField label="University (optional)" name="university" value={form.university || ''} onChange={update} />
-
-=======
             <FormField label="Personal email" name="personalEmail" type="email" value={form.personalEmail} onChange={update} />
             <FormField label="Phone number" name="phone" type="tel" value={form.phone} onChange={update} placeholder="+94 77 000 0000" />
             <FormField label="Address (optional)" name="address" value={form.address} onChange={update} />
@@ -104,7 +63,6 @@ function EmployeeForm() {
             <FormField label="Previous company (optional)" name="previousCompany" value={form.previousCompany} onChange={update} />
             <FormField label="Previous job title (optional)" name="previousJobTitle" value={form.previousJobTitle} onChange={update} />
             <FormField label="Years of experience (optional)" name="yearsOfExperience" value={form.yearsOfExperience} onChange={update} />
->>>>>>> Stashed changes
           </div>
         </div>
 
@@ -130,6 +88,11 @@ function EmployeeForm() {
     </section>
   );
 }
+
+export default function NewEmployeePage() {
+  return <AuthGuard roles={['hr', 'admin']}>{(user) => <DashboardShell user={user}><EmployeeForm /></DashboardShell>}</AuthGuard>;
+}
+
 
 export default function NewEmployeePage() {
   return <AuthGuard roles={['hr', 'admin']}>{(user) => <DashboardShell user={user}><EmployeeForm /></DashboardShell>}</AuthGuard>;
