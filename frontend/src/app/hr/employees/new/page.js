@@ -4,6 +4,7 @@ import { useState } from 'react';
 import AuthGuard from '@/components/AuthGuard';
 import DashboardShell from '@/components/DashboardShell';
 import FormField from '@/components/FormField';
+import { authenticatedRequest } from '@/lib/api';
 import { getToken } from '@/lib/auth';
 
 const initialForm = {
