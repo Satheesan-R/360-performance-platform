@@ -1,7 +1,7 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'PeoplePulse | Performance Platform',
+  title: 'Performance360 | Performance Platform',
   description: 'Employee performance and development platform',
 };
 

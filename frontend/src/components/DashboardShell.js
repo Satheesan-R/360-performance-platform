@@ -19,8 +19,13 @@ export default function DashboardShell({ user, children }) {
         <nav>
           <a className="nav-active" href={`/dashboard/${user.role}`}>Overview</a>
           {(user.role === 'hr' || user.role === 'admin') && (
-            <a href="/hr/employees/new">Add employee</a>
+            <a href="/hr/employees/new">Onboarding</a>
           )}
+          <a className='Performance' href="/performance">Performance</a>
+          <a className='Goals' href="/goals">Goals</a>
+          <a className='Training' href="/training">Training</a>
+          <a className='Reports' href="/reports">Reports</a>
+          <a className='Settings' href="/settings">Settings</a>
         </nav>
         <div className="sidebar-profile">
           <div className="avatar">{user.email[0].toUpperCase()}</div>

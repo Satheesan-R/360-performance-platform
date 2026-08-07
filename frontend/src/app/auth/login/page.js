@@ -6,10 +6,23 @@ import Brand from '@/components/Brand';
 import FormField from '@/components/FormField';
 import { apiRequest } from '@/lib/api';
 import { dashboardFor, saveSession } from '@/lib/auth';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
+
+const formFields = [
+  {
+    label: 'Work email',
+    name: 'email',
+    type: 'email',
+    placeholder: 'name@company.com',
+    autoComplete: 'email',
+  },
+];
 
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -55,26 +68,42 @@ export default function LoginPage() {
 
           {error && <div className="alert alert-error">{error}</div>}
 
-          <FormField
-            label="Work email"
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={update}
-            placeholder="name@company.com"
-            autoComplete="email"
-            required
-          />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={update}
-            placeholder="Enter your password"
-            autoComplete="current-password"
-            required
-          />
+          {formFields.map((field) => (
+            <FormField
+              key={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              value={form[field.name]}
+              onChange={update}
+              placeholder={field.placeholder}
+              autoComplete={field.autoComplete}
+              required
+            />
+          ))}
+          <label className="field">
+            <span>Password</span>
+            <div className="field-control">
+              <input
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={form.password}
+                onChange={update}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                className="field-icon-button"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+          </label>
           <button className="button button-primary button-block" disabled={loading}>
             {loading ? <><span className="spinner small" />Signing in…</> : 'Sign in'}
           </button>
