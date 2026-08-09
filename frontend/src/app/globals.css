@@ -159,3 +159,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .form-grid { grid-template-columns: 1fr; }.form-section { padding: 26px 22px; }.form-actions, .page-heading, .invitation-result { align-items: stretch; flex-direction: column; }.form-actions { padding: 22px; }.form-actions .button { width: 100%; }
   .page-heading h1 { font-size: 29px; }.topbar > div { display: none; }.topbar { justify-content: flex-end; }
 }
+
+/* White dashboard sidebar theme */
+.sidebar { color: var(--ink); border-right: 1px solid #e2e8f0; background: #ffffff; }
+.sidebar nav a { color: #64748b; }
+.sidebar nav a:hover { color: #1d4ed8; background: #eff6ff; }
+.sidebar nav .nav-active { color: #ffffff; background: #2563eb; }
+.sidebar-profile { border-top-color: #e2e8f0; }
+.sidebar-profile .avatar { color: #ffffff; background: #2563eb; }
+.sidebar-profile strong { color: #1e293b; }
+.sidebar-profile small { color: #94a3b8; }
+.sidebar-role-label { margin-top: 34px; padding: 0 14px; color: #94a3b8; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.sidebar .sidebar-role-label + nav { margin-top: 14px; }
