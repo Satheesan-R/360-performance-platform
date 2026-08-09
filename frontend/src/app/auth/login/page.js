@@ -51,14 +51,14 @@ export default function LoginPage() {
 
   return (
     <main className={`${styles.blueLogin} auth-layout`}>
-      <section className="auth-story">
+      <section className={`auth-story ${styles.blueStory}`}>
         <Brand light />
         <div className="story-copy">
           <span className="eyebrow light">Better teams start with clarity</span>
           <h1>Turn every conversation into meaningful growth.</h1>
-          <p>Goals, feedback, and performance insightsâ€”all in one place for your people.</p>
+          <p>Goals, feedback, and performance insights—all in one place for your people.</p>
         </div>
-        <div className="story-stat"><strong>360Â°</strong><span>A complete view of employee performance</span></div>
+        <div className="story-stat"><strong>360</strong><span>A complete view of employee performance</span></div>
       </section>
 
       <section className="auth-panel">
@@ -114,4 +114,5 @@ export default function LoginPage() {
     </main>
   );
 }
+
 
