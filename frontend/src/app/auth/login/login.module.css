@@ -1,0 +1,44 @@
+﻿.blueStory { color: white; background: #2563eb; }
+.blueLogin { --login-blue: #2563eb; --login-blue-dark: #1d4ed8; --login-blue-soft: #dbeafe; --login-page: #f8fafc; --login-text: #0f172a; --login-muted: #64748b; --login-line: #e2e8f0; }
+.blueLogin :global(.auth-story) { background: var(--login-blue); }
+.blueLogin :global(.auth-story)::before { border-color: rgba(255, 255, 255, .15); box-shadow: 0 0 0 70px rgba(255, 255, 255, .035), 0 0 0 150px rgba(255, 255, 255, .022); }
+.blueLogin :global(.auth-story)::after { background: rgba(255, 255, 255, .07); }
+.blueLogin :global(.brand-light .brand-mark) { color: var(--login-blue); background: white; }
+.blueLogin :global(.brand-light small) { color: rgba(255, 255, 255, .68); }
+.blueLogin :global(.eyebrow.light) { color: #dbeafe; }
+.blueLogin :global(.story-copy p), .blueLogin :global(.story-stat span) { color: rgba(255, 255, 255, .75); }
+.blueLogin :global(.auth-panel) { background: var(--login-page); }
+.blueLogin :global(.auth-card h2), .blueLogin :global(.field) { color: var(--login-text); }
+.blueLogin :global(.auth-card > p), .blueLogin :global(.form-footnote) { color: var(--login-muted); }
+.blueLogin :global(.eyebrow) { color: var(--login-blue); }
+.blueLogin :global(.field input) { color: var(--login-text); border-color: var(--login-line); background: white; }
+.blueLogin :global(.field input:focus) { border-color: #60a5fa; box-shadow: 0 0 0 4px rgba(37, 99, 235, .12); }
+.blueLogin :global(.field input::placeholder) { color: #94a3b8; }
+.blueLogin :global(.field-icon-button) { color: #94a3b8; }
+.blueLogin :global(.field-icon-button:hover) { color: var(--login-blue); background: #eff6ff; }
+.blueLogin :global(.button-primary) { color: white; background: var(--login-blue); box-shadow: 0 10px 24px rgba(37, 99, 235, .2); }
+.blueLogin :global(.button-primary:hover:not(:disabled)) { background: var(--login-blue-dark); box-shadow: 0 13px 28px rgba(37, 99, 235, .28); }
+.blueLogin :global(.spinner.small) { border-color: rgba(255, 255, 255, .4); border-top-color: white; }
+
+
+/* Larger login form typography and controls */
+.blueLogin :global(.auth-card) { width: min(480px, 100%); }
+.blueLogin :global(.auth-card > .eyebrow) { margin-bottom: 14px; font-size: 13px; }
+.blueLogin :global(.auth-card h2) { margin-bottom: 13px; font-size: 36px; line-height: 1.18; }
+.blueLogin :global(.auth-card > p) { margin-bottom: 34px; font-size: 16px; line-height: 1.65; }
+.blueLogin :global(.auth-card .field) { gap: 10px; margin-bottom: 22px; font-size: 15px; }
+.blueLogin :global(.auth-card .field input) { height: 54px; padding-left: 16px; font-size: 16px; }
+.blueLogin :global(.auth-card .field-control input) { padding-right: 54px; }
+.blueLogin :global(.auth-card .button) { min-height: 52px; font-size: 16px; }
+.blueLogin :global(.auth-card .form-footnote) { margin-top: 27px; font-size: 14px; line-height: 1.5; }
+@media (max-width: 600px) {
+  .blueLogin :global(.auth-card h2) { font-size: 31px; }
+  .blueLogin :global(.auth-card > p) { font-size: 15px; }
+}
+
+/* Bring the two desktop content areas closer together */
+@media (min-width: 900px) {
+  .blueLogin { grid-template-columns: minmax(440px, 1fr) minmax(520px, 1fr); }
+  .blueLogin :global(.auth-story) { padding-right: 40px; }
+  .blueLogin :global(.auth-panel) { place-items: center start; padding-left: 100px; }
+}
