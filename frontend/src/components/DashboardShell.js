@@ -68,7 +68,10 @@ export default function DashboardShell({ user, children }) {
           <span><strong>{user.email}</strong><small>{user.role}</small></span>
         </div>
       </aside>
-     
+      <main className="dashboard-main">
+        
+        {children}
+      </main>
     </div>
   );
 }
