@@ -1,0 +1,26 @@
+﻿.blueActivation { --activation-blue: #2563eb; --activation-blue-dark: #1d4ed8; --activation-soft: #dbeafe; --activation-page: #f8fafc; --activation-text: #0f172a; --activation-muted: #64748b; --activation-line: #e2e8f0; background: radial-gradient(circle at 50% 12%, #eff6ff 0, var(--activation-page) 44%); }
+.blueActivation :global(.brand) { color: var(--activation-blue); }
+.blueActivation :global(.brand-mark) { color: white; background: var(--activation-blue); }
+.blueActivation :global(.brand small) { color: var(--activation-muted); }
+.blueActivation :global(.activation-card) { border-color: var(--activation-line); background: white; box-shadow: 0 24px 70px rgba(37, 99, 235, .10); }
+.blueActivation :global(.steps)::before { background: var(--activation-line); }
+.blueActivation :global(.step) { color: #94a3b8; }
+.blueActivation :global(.step span) { border-color: var(--activation-line); background: white; }
+.blueActivation :global(.step.active) { color: var(--activation-blue); }
+.blueActivation :global(.step.active span) { color: white; border-color: var(--activation-blue); background: var(--activation-blue); }
+.blueActivation :global(.eyebrow) { color: var(--activation-blue); }
+.blueActivation :global(.activation-card h2), .blueActivation :global(.field) { color: var(--activation-text); }
+.blueActivation :global(.activation-card form > p), .blueActivation :global(.center-state p) { color: var(--activation-muted); }
+.blueActivation :global(.field input) { color: var(--activation-text); border-color: var(--activation-line); background: white; }
+.blueActivation :global(.field input:focus) { border-color: #60a5fa; box-shadow: 0 0 0 4px rgba(37, 99, 235, .12); }
+.blueActivation :global(.field input::placeholder) { color: #94a3b8; }
+.blueActivation :global(.button-primary) { color: white; background: var(--activation-blue); box-shadow: 0 10px 24px rgba(37, 99, 235, .20); }
+.blueActivation :global(.button-primary:hover:not(:disabled)) { background: var(--activation-blue-dark); box-shadow: 0 13px 28px rgba(37, 99, 235, .28); }
+.blueActivation :global(.text-button) { color: var(--activation-blue); }
+.blueActivation :global(.state-icon) { color: var(--activation-blue); background: var(--activation-soft); }
+.blueActivation :global(.state-icon.success) { color: white; background: var(--activation-blue); }
+.blueActivation :global(.state-icon.danger) { color: #dc2626; background: #fee2e2; }
+.blueActivation :global(.spinner) { border-color: #dbeafe; border-top-color: var(--activation-blue); }
+.blueActivation :global(.spinner.small) { border-color: rgba(255,255,255,.4); border-top-color: white; }
+.blueActivation :global(.alert-success) { color: #1e40af; border-color: #bfdbfe; background: #eff6ff; }
+.blueActivation :global(.otp-input) { color: var(--activation-blue); }
