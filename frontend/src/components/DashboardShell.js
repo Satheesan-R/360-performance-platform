@@ -68,13 +68,7 @@ export default function DashboardShell({ user, children }) {
           <span><strong>{user.email}</strong><small>{user.role}</small></span>
         </div>
       </aside>
-      <main className="dashboard-main">
-        <header className="topbar">
-          <div><small>{user.role} workspace</small><strong>Performance management</strong></div>
-          <button className="button button-ghost" onClick={logout}>Sign out</button>
-        </header>
-        {children}
-      </main>
+     
     </div>
   );
 }
