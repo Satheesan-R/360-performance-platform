@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -7,6 +7,7 @@ import FormField from '@/components/FormField';
 import { apiRequest } from '@/lib/api';
 import { dashboardFor, saveSession } from '@/lib/auth';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import styles from './login.module.css';
 
 
 const formFields = [
@@ -49,15 +50,15 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="auth-layout">
+    <main className={`${styles.blueLogin} auth-layout`}>
       <section className="auth-story">
         <Brand light />
         <div className="story-copy">
           <span className="eyebrow light">Better teams start with clarity</span>
           <h1>Turn every conversation into meaningful growth.</h1>
-          <p>Goals, feedback, and performance insights—all in one place for your people.</p>
+          <p>Goals, feedback, and performance insightsâ€”all in one place for your people.</p>
         </div>
-        <div className="story-stat"><strong>360°</strong><span>A complete view of employee performance</span></div>
+        <div className="story-stat"><strong>360Â°</strong><span>A complete view of employee performance</span></div>
       </section>
 
       <section className="auth-panel">
@@ -105,7 +106,7 @@ export default function LoginPage() {
             </div>
           </label>
           <button className="button button-primary button-block" disabled={loading}>
-            {loading ? <><span className="spinner small" />Signing in…</> : 'Sign in'}
+            {loading ? <><span className="spinner small" />Signing inâ€¦</> : 'Sign in'}
           </button>
           <p className="form-footnote">New employee? Use the activation link sent to your email.</p>
         </form>
@@ -113,3 +114,4 @@ export default function LoginPage() {
     </main>
   );
 }
+
